@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: status-checker
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: status-checker
+  template: 
+    metadata:
+      labels:
+        app: status-checker
+    spec:
+      containers: 
+      - name: status-checker
+        image: status-checker:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20
