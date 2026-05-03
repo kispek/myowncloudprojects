@@ -102,7 +102,7 @@ resource "aws_route_table_association" "private_a" {
 resource "aws_security_group" "ssh_access" {
   vpc_id = aws_vpc.main.id
 
-  # Ruch Przychodzący Ingress
+  #Przychodzący Ingress
   ingress {
     from_port   = 22
     to_port     = 22
@@ -110,7 +110,7 @@ resource "aws_security_group" "ssh_access" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # Ruch Wychodzący Egress
+  #Wychodzący Egress
   egress {
     from_port   = 0
     to_port     = 0
